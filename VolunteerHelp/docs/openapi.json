@@ -1,0 +1,22 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "VolunteerHelp API",
+    "version": "1.0.0",
+    "description": "REST API сервиса поиска и бронирования волонтёров"
+  },
+  "servers": [{"url": "http://localhost:8080"}],
+  "paths": {
+    "/api/auth/csrf": {"get": {"summary": "Получить CSRF-токен"}},
+    "/api/auth/login": {"post": {"summary": "Вход"}},
+    "/api/auth/logout": {"post": {"summary": "Выход"}},
+    "/api/volunteers": {"get": {"summary": "Поиск волонтёров"}, "post": {"summary": "Создать профиль"}},
+    "/api/requests": {"get": {"summary": "Список заявок"}, "post": {"summary": "Создать заявку"}},
+    "/api/requests/{id}/bookings": {"post": {"summary": "Забронировать волонтёра"}},
+    "/api/bookings": {"get": {"summary": "Список бронирований"}},
+    "/api/bookings/{id}/start": {"post": {"summary": "Начать поручение"}},
+    "/api/bookings/{id}/complete": {"post": {"summary": "Завершить поручение"}},
+    "/api/bookings/{id}/review": {"post": {"summary": "Оставить отзыв"}},
+    "/api/audit": {"get": {"summary": "Журнал аудита"}}
+  }
+}

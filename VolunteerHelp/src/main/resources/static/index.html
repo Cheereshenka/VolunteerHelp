@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VolunteerHelp</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header><div><strong>VolunteerHelp</strong><span class="muted">Сервис поиска и бронирования волонтёров</span></div><button id="logout" hidden>Выйти</button></header>
+<main>
+  <section id="loginCard" class="card">
+    <h1>Вход</h1>
+    <p class="muted">Демо: customer/customer, volunteer/volunteer, admin/admin</p>
+    <form id="loginForm" class="grid"><input name="username" placeholder="Логин" required><input name="password" type="password" placeholder="Пароль" required><button>Войти</button></form>
+    <div id="loginError" class="error"></div>
+    <hr>
+    <h2>Новый пользователь</h2>
+    <p class="muted">Можно зарегистрироваться как заказчик или волонтёр. Профиль волонтёра создаётся сразу.</p>
+    <form id="registerForm" class="grid">
+      <input name="fullName" placeholder="ФИО" required>
+      <input name="username" placeholder="Логин" required>
+      <input name="password" type="password" minlength="6" placeholder="Пароль (не менее 6 символов)" required>
+      <select name="role" id="registerRole" required><option value="CUSTOMER">Заказчик</option><option value="VOLUNTEER">Волонтёр</option></select>
+      <div id="volunteerRegistrationFields" class="grid" hidden>
+        <input name="skills" placeholder="Виды помощи: покупки, уборка...">
+        <input name="district" placeholder="Район">
+        <input name="availableFrom" type="time" value="09:00">
+        <input name="availableTo" type="time" value="19:00">
+        <textarea name="about" placeholder="Расскажите о себе"></textarea>
+      </div>
+      <button>Зарегистрироваться</button>
+    </form>
+    <div id="registerMsg"></div>
+  </section>
+  <section id="app" hidden>
+    <div class="card profile"><div><h2 id="hello"></h2><span id="role"></span></div><div id="stats" class="stats"></div></div>
+    <nav class="tabs"><button data-tab="search">Поиск волонтёров</button><button data-tab="requests">Мои заявки</button><button data-tab="bookings">Бронирования</button><button data-tab="profile">Профиль</button><button data-tab="admin" id="adminTab" hidden>Аудит</button></nav>
+    <section id="search" class="tab card"><h2>Поиск волонтёров</h2><form id="searchForm" class="grid"><input name="category" placeholder="Вид помощи, например покупки"><input name="district" placeholder="Район"><input name="from" type="time"><input name="to" type="time"><input name="minRating" type="number" min="0" max="5" step="0.1" placeholder="Рейтинг от"><button>Найти</button></form><div id="volunteers"></div></section>
+    <section id="requests" class="tab card" hidden><h2>Заявки</h2><form id="requestForm" class="grid"><input name="category" placeholder="Вид помощи" required><input name="address" placeholder="Район и адрес" required><input name="requestedDate" type="date" required><input name="startTime" type="time" required><input name="endTime" type="time" required><textarea name="description" placeholder="Описание поручения" required></textarea><button>Создать заявку</button></form><div id="requestsList"></div></section>
+    <section id="bookings" class="tab card" hidden><h2>Бронирования</h2><div id="bookingsList"></div></section>
+    <section id="profile" class="tab card" hidden><h2>Профиль волонтёра</h2><form id="profileForm" class="grid"><input name="skills" placeholder="Виды помощи через запятую" required><input name="district" placeholder="Район" required><input name="availableFrom" type="time" required><input name="availableTo" type="time" required><textarea name="about" placeholder="О себе"></textarea><label><input name="active" type="checkbox" checked> Доступен для бронирования</label><button>Сохранить профиль</button></form><div id="profileMsg"></div></section>
+    <section id="admin" class="tab card" hidden><h2>Журнал аудита</h2><div id="auditList"></div></section>
+  </section>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>
